@@ -1,5 +1,5 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/abd86dc4-92d7-4f79-b9af-51ae7c7ed9bb" />
+<img width="1024" height="576" alt="GHBanner" src="https://github.com/user-attachments/assets/abd86dc4-92d7-4f79-b9af-51ae7c7ed9bb" />
 </div>
 
 # Currency Guesser
