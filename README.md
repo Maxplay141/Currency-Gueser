@@ -6,7 +6,6 @@
 
 This contains everything you need to run Currency Guesser app locally.
 
-View your app in AI Studio: https://ai.studio/apps/drive/12ixnAu5NSylwdYT3PuE6zPO7qKPtymf8
 
 ## Run Locally
 
