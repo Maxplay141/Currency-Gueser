@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Currency Guesser Game</title>
+    
+    <!-- PWA Manifest & Theme -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <meta name="theme-color" content="#10b981" />
+
+    <!-- iOS PWA Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Currency Guesser" />
+    <link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAgAAAAIACAYAAAD0eNT6AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAB3RJTUUH6AYEFAgD7ATgJQAABKpJREFUeNrt3dFtG0UABNBkCaQEOkhHoBOkg5wgHaQDSAdIB9IOkh0kh06QDpIOmA/YmLEPYg95vN8+74A/YX37y7sEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACY87y19XQ89e9331t79u7dX729vf2Lg/8vAADgUeP9l7en1/345bX1Vz/+LwEA4G0+3u/t315fDwAA/N0vVwAAgD1CAAAYQggAAGFIAABAChEAAAApRAAAA KQQAQAAKUQAAACkEAEAAChEAAAApBAAAAQhAAAQIYQAAACEIAABDCAAAQhAAAQIYQAAACEEAAAhCAAAQggAAEIQAACEIAABCCAAAQggAAEIQAAACEIAABDCAAAQhAAAQIYQAAACEIAABDCAAAQhAAAQIYQAAACEEAAAhCAAAQggAAEIQAACEIAABCCAAAQggAAEIQAAACEIAABDCAAAQhAAAQIYQAAACEIAABDCAAAQhAAAQIYQAAACEEAAAhCAAAQggAAEIQAACEIAABCCAAAQggAAEIQAAACEIAABDCAAAQhAAAQIYQAAACEIAABDCAAAQhAAAQIYQAAACEEAAAhCAAAQggAAEIQAACEIAABCCAAAQggAAEIQAAACEIAABDCAAAQhAAAQIYQAAACEIAABDCAAAQhAAAQIYQAAACEEAAAhCAAAQggAAEIQAACEIAABCCAAAQggAAEIQAAACEIAABDCAAAQhAAAQIYQAAACEIAABDCAAAQhAAAQIYQAAACEEAAAhCAAAQggAAEIQAACEIAABCCAADQ+P9l7em1/345bX1Vx/+/zIAAB7j8X5v/9b6epp79+5fvb29/YuD/y+N91/enp4CAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACgUv8A5c7TbqUuS8IAAAAASUVORK5CYII=" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        /* Default Theme: Emerald Sea */
+        --color-primary: 16 185 129; /* Emerald 500 */
+        --color-secondary: 14 165 233; /* Sky 500 */
+        --color-accent: 245 158 11; /* Amber 500 */
+        --color-bg-light: 240 253 250; /* Default light background */
+        --color-bg-dark: 13 47 43; /* Default dark background */
+        --flow-duration: 4s;
+      }
+      
+      .rainbow-flow-anim {
+        background-image: linear-gradient(to right, #ef4444, #f97316, #eab308, #22c55e, #3b82f6, #6366f1, #8b5cf6, #ef4444);
+        background-size: 200% auto;
+        animation: bg-flow var(--flow-duration) linear infinite;
+      }
+
+      @keyframes bg-flow {
+        from {
+          background-position: 0% center;
+        }
+        to {
+          background-position: 200% center;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .rainbow-flow-anim {
+          animation: none;
+        }
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              primary: 'rgb(var(--color-primary) / <alpha-value>)',
+              secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
+              accent: 'rgb(var(--color-accent) / <alpha-value>)',
+              'theme-light': 'rgb(var(--color-bg-light) / <alpha-value>)',
+              'theme-dark': 'rgb(var(--color-bg-dark) / <alpha-value>)',
+            },
+            keyframes: {
+              shake: {
+                '0%, 100%': { transform: 'translateX(0)' },
+                '10%, 30%, 50%, 70%, 90%': { transform: 'translateX(-10px)' },
+                '20%, 40%, 60%, 80%': { transform: 'translateX(10px)' },
+              },
+              shine: {
+                '0%': { transform: 'translateX(-100%) skewX(-20deg)' },
+                '100%': { transform: 'translateX(200%) skewX(-20deg)' },
+              },
+              flip: {
+                '0%': { transform: 'rotateY(0deg)' },
+                '100%': { transform: 'rotateY(180deg)' },
+              },
+              fadeIn: {
+                '0%': { opacity: 0, transform: 'scale(0.95)' },
+                '100%': { opacity: 1, transform: 'scale(1)' },
+              },
+              pulsate: {
+                '0%, 100%': { opacity: 1, transform: 'scale(1)' },
+                '50%': { opacity: 0.5, transform: 'scale(0.95)' },
+              },
+              pulseCorrect: {
+                '0%, 100%': { transform: 'scale(1)' },
+                '50%': { transform: 'scale(1.05)' },
+              },
+            },
+            animation: {
+              shake: 'shake 0.5s ease-in-out',
+              shine: 'shine 1.5s infinite linear',
+              flip: 'flip 0.6s ease-in-out forwards',
+              fadeIn: 'fadeIn 0.3s ease-out forwards',
+              pulsate: 'pulsate 1.5s ease-in-out infinite',
+              pulseCorrect: 'pulseCorrect 0.5s ease-in-out',
+            }
+          }
+        }
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').then(registration => {
+            console.log('ServiceWorker registration successful with scope: ', registration.scope);
+          }).catch(err => {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
