@@ -1,10 +1,10 @@
 <div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/abd86dc4-92d7-4f79-b9af-51ae7c7ed9bb" />
 </div>
 
-# Run and deploy your AI Studio app
+# Currency Guesser
 
-This contains everything you need to run your app locally.
+This contains everything you need to run Currency Guesser app locally.
 
 View your app in AI Studio: https://ai.studio/apps/drive/12ixnAu5NSylwdYT3PuE6zPO7qKPtymf8
 
